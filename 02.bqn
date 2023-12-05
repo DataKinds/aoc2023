@@ -11,7 +11,13 @@ ParseGame←{ 𝕊𝕩 :
   •Show ≢¨ games
   (•ParseFloat id)⋈•ParseFloat⚇¯2⌾((1⊸⊏ ⍉)¨) games
 }
+id‿gs←ParseGame l
 
+# takes a game 𝕩 and produces a ⟨3⟩-array in RGB order
+SortGame←{
+  tagged←(⊏˘𝕩)⍒⊸⊏𝕩
+  needed←"red"‿"green"‿"blue"∊˘tagged
+}
 # 𝕨 is the bag contents ≢𝕨 is ⟨3,2⟩
 # 𝕩 is the game round. ≢𝕩 is ⟨n,2⟩ for n≤3.
 # they both should look like
@@ -22,7 +28,7 @@ ParseGame←{ 𝕊𝕩 :
 #              ┘
 # returns the viability of the game
 ProcessGame←{
-  
+  𝕩
 }
 
 ParseGame l
