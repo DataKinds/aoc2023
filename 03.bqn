@@ -7,8 +7,11 @@ caPart2←inums+igears
 
 DilateAdj←{(DilateOrtho 𝕩)++´⟨»⌾⍉ »𝕩, »⌾⍉ «𝕩, «⌾⍉ »𝕩, «⌾⍉ «𝕩⟩}
 DilateOrtho←{+´⟨𝕩,»𝕩,«𝕩,»⌾⍉𝕩,«⌾⍉𝕩⟩}
+Sp←{𝕩⊔˜-⟜1(𝕩≠𝕨)×(1⊸+ +` 𝕩=𝕨)}
 
 # Part 1
+# Digits are given state 1, symbols are given state 2, and significant
+# digits are given state 3. 1 adjacent to 2 or 3 becomes 3.
 StepCA1←{
   nums←1=𝕩
   syms←2=𝕩
@@ -21,8 +24,9 @@ indices←/⥊finalCA
 +´ •ParseFloat¨ (⊐ indices-↕≠indices)⊔indices⊏⥊i
 
 # Part 2
-# Each gear is given a unique CA value > 3, and those values are propagated same as part 1.
-Sp←{𝕩⊔˜-⟜1(𝕩≠𝕨)×(1⊸+ +` 𝕩=𝕨)}
+# Each gear is given a unique CA value > 2, and numbers are given the
+# values of the adjacent gears.
+Range←{(⊑𝕩)⊸+ ∘ (↕1⊸+) ∘ -˜´ 𝕩}
 StepCA2←{
   nums←1=𝕩
   sigs←2=𝕩
@@ -30,4 +34,10 @@ StepCA2←{
   𝕩⌈nums×DilateAdj gears
 }
 finalCA2←{𝕩×𝕩>2} StepCA2⍟100 caPart2
-+´ ×´¨ {𝕩 /˜ 2=≠¨𝕩} •ParseFloat⚇1 '*'Sp¨ (-⟜1{𝕩×𝕩>0}finalCA2-2)⊔i
+numStrs←{(Range (⌊´⋈⌈´) 1⊸⊑⊔⥊(𝕩= finalCA2-igears))⊏⥊i}¨ (Range 3⋈(⌈´⥊finalCA2))
+mulStrs←{
+  𝕊⟨x⟩ : x ;
+  𝕊x : {(⊑𝕩)∾"*"∾(¯1⊸⊑𝕩)} x
+}¨ {(1⊸- 0⊸= ≠¨𝕩)/𝕩}¨ '.'Sp¨numStrs
++´ ×´¨ •ParseFloat⚇1 {(2=≠¨𝕩)/𝕩} {(1-0=≠¨𝕩)/𝕩}¨ '*'Sp¨mulStrs
+
