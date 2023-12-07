@@ -21,7 +21,7 @@ StepCA1←{
 }
 finalCA←3=StepCA1⍟100 caPart1
 indices←/⥊finalCA
-+´ •ParseFloat¨ (⊐ indices-↕≠indices)⊔indices⊏⥊i
+•Show +´ •ParseFloat¨ (⊐ indices-↕≠indices)⊔indices⊏⥊i
 
 # Part 2
 # Each gear is given a unique CA value > 2, and numbers are given the
@@ -39,5 +39,5 @@ mulStrs←{
   𝕊⟨x⟩ : x ;
   𝕊x : {(⊑𝕩)∾"*"∾(¯1⊸⊑𝕩)} x
 }¨ {(1⊸- 0⊸= ≠¨𝕩)/𝕩}¨ '.'Sp¨numStrs
-+´ ×´¨ •ParseFloat⚇1 {(2=≠¨𝕩)/𝕩} {(1-0=≠¨𝕩)/𝕩}¨ '*'Sp¨mulStrs
+•Show +´ ×´¨ •ParseFloat⚇1 {(2=≠¨𝕩)/𝕩} {(1-0=≠¨𝕩)/𝕩}¨ '*'Sp¨mulStrs
 

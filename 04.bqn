@@ -8,4 +8,4 @@ CardPoints←{
   winning‿mine←•ParseFloat⚇1 Squish¨ ' '⊸Sp¨ '|'⊸Sp cs
   {𝕊0 : 0 ; 𝕊x : 2⊸⋆ x-1} +´ winning∊mine
 }
-+´ CardPoints¨ •FLines "04.in"
+•Show +´ CardPoints¨ •FLines "04.in"
